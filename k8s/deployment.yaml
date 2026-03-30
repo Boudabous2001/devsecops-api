@@ -1,0 +1,49 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: devsecops-api
+  labels:
+    app: devsecops-api
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: devsecops-api
+  template:
+    metadata:
+      labels:
+        app: devsecops-api
+    spec:
+      containers:
+        - name: devsecops-api
+          image: devsecops-api:latest
+          ports:
+            - containerPort: 3000
+          securityContext:
+            runAsNonRoot: true
+            runAsUser: 1000
+            allowPrivilegeEscalation: false
+            readOnlyRootFilesystem: true
+          resources:
+            requests:
+              memory: "64Mi"
+              cpu: "100m"
+            limits:
+              memory: "128Mi"
+              cpu: "250m"
+          env:
+            - name: PORT
+              value: "3000"
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: devsecops-api-service
+spec:
+  selector:
+    app: devsecops-api
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 3000
+  type: ClusterIP

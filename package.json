@@ -1,0 +1,13 @@
+{
+  "name": "devsecops-api",
+  "version": "1.0.0",
+  "description": "Petite API Express pour projet DevSecOps",
+  "main": "src/app.js",
+  "scripts": {
+    "start": "node src/app.js",
+    "test": "echo 'No tests yet' && exit 0"
+  },
+  "dependencies": {
+    "express": "4.18.2"
+  }
+}
