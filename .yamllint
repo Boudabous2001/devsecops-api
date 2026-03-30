@@ -6,8 +6,6 @@ rules:
     max: 150
   truthy:
     allowed-values: ["true", "false", "on"]
-  document-start:
-    present: false
+  document-start: disable
   new-line-at-end-of-file: disable
-  new-lines:
-    type: unix
+  new-lines: disable
